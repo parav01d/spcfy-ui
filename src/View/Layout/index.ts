@@ -1,0 +1,1 @@
+export * from "View/Layout/Page/Centralized/CentralizedPage";
