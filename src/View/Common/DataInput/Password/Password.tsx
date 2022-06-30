@@ -16,16 +16,16 @@ export const Password = ({ subject, value, isValid, isDisabled }: IPasswordProps
     return (
         <DaisyInput
             type={"password"}
-            value={value} 
-            onChange={(event) => subject.next(event.target.value)} 
+            value={value}
+            onChange={(event) => subject.next(event.target.value)}
             disabled={isDisabled === true}
             color={
-                isValid === undefined 
-                    ? "primary" 
-                    : isValid === true 
+                value.length === 0
+                    ? "primary"
+                    : isValid === true
                         ? "success"
                         : "error"
-            }/>
+            } />
     );
 
 };

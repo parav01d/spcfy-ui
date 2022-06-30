@@ -15,18 +15,17 @@ export const Input = ({ subject, value, isValid, isDisabled }: IInputProps) => {
 
     return (
         <DaisyInput
-            value={value} 
-            onChange={(event) => subject.next(event.target.value)} 
+            value={value}
+            onChange={(event) => subject.next(event.target.value)}
             disabled={isDisabled === true}
             color={
-                isValid === undefined 
-                    ? "primary" 
-                    : isValid === true 
+                value.length === 0
+                    ? "primary"
+                    : isValid === true
                         ? "success"
                         : "error"
-            }/>
+            } />
     );
-
 };
 
-
+export const validateEmail = (mail: string) => (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail));

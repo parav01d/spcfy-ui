@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/redux-logger": "^3.0.9",
     "daisyui": "^2.17.0",
     "react": "^18.2.0",
     "react-daisyui": "^2.0.4",
@@ -55,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@types/redux-logger": "^3.0.9",
     "@reduxjs/toolkit": "^1.8.2",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",

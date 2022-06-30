@@ -36,10 +36,8 @@ export default {
 
 
 export const Standard = (args: IInputProps) => (
-    <Theme className={"h-full flex"} dataTheme={"spcfy"}>
-        <CentralizedPage>
-            <Input {...args} />
-        </CentralizedPage>
+    <Theme className={"h-full flex flex-1 justify-center items-center"} dataTheme={"spcfy"}>
+        <Input {...args} />
     </Theme>
 )
 export const Disabled = (args: IInputProps) => <Input {...args} isDisabled={true} />

@@ -23,7 +23,7 @@ module.exports = {
     themes: [
       {
         spcfy: {
-          "primary": "#ff0000",
+          "primary": "#000000",
           "secondary": "#ffffff",
           "accent": "#40bc27",
           "neutral": "#221E38",

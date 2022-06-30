@@ -6,26 +6,24 @@ import { CentralizedPage } from 'View/Layout';
 import "View/index.css"
 
 export default {
-    title    : 'Common/Action/Button',
+    title: 'Common/Action/Button',
     component: Button,
-    argTypes : {
+    argTypes: {
         type: {
             options: ['primary', 'secondary'],
-            control: {type: 'radio'},
+            control: { type: 'radio' },
         },
     },
     args: {
         type: 'primary',
         children: "Help Me!!!",
         subject: new Subject<void>()
-      },
+    },
 };
 
 
 export const Standard = (args: IButtonProps<void>) => (
-    <Theme className={"h-full flex"} dataTheme={"spcfy"}>
-        <CentralizedPage>
-            <Button {...args}>{args.children}</Button>
-        </CentralizedPage>
+    <Theme className={"h-full flex flex-1 justify-center items-center"} dataTheme={"spcfy"}>
+        <Button {...args}>{args.children}</Button>
     </Theme>
 )

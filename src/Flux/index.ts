@@ -6,13 +6,14 @@ import { Observable } from 'rxjs';
 import { createEpicMiddleware } from 'redux-observable';
 import logger from 'redux-logger';
 import * as Requests from "Repository"
+import { TypedUseSelectorHook, useDispatch as useRRDispatch, useSelector as useRRSelector } from 'react-redux';
 
 export type TActions = typeof Actions;
 export type TDependencies = typeof Requests;
 
 export default Actions;
 
-export const epicMiddleware = createEpicMiddleware<Action, Action, typeof State, TDependencies & TActions> ({
+export const epicMiddleware = createEpicMiddleware<Action, Action, typeof State, TDependencies & TActions>({
     dependencies: {
         ...Actions,
         ...Requests
@@ -21,7 +22,7 @@ export const epicMiddleware = createEpicMiddleware<Action, Action, typeof State,
 
 export const Store = configureStore({
     reducer: combineReducers({ ...Reducer }),
-    middleware: [ epicMiddleware as any, logger],
+    middleware: [epicMiddleware as any, logger],
     devTools: process.env.NODE_ENV === 'development',
 })
 
@@ -31,5 +32,8 @@ export type Epic = (
     state$: Observable<typeof State>,
     dependencies: TDependencies & TActions
 ) => (Observable<AnyAction>)
+
+export const useDispatch: () => AppDispatch = useRRDispatch
+export const useSelector: TypedUseSelectorHook<typeof State> = useRRSelector
 
 epicMiddleware.run(Epics);

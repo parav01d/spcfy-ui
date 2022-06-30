@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
 import { Theme } from 'react-daisyui';
 import { Footer, Navigation } from 'View/Component';
-import { Button, Input, Password } from "View/Common";
+import { Button, Input, Password, validateEmail } from "View/Common";
 import { Subject } from 'rxjs';
-import Actions from 'Flux';
+import Actions, { useDispatch, useSelector } from 'Flux';
+import { LoadingIndicator } from 'View/Common/DataDisplay/LoadingIndicator/LoadingIndicator';
 
 function LoginPage() {
 
   const dispatch = useDispatch()
 
-  const [email$] = useState(() => new Subject<string>());
-  const [password$] = useState(() => new Subject<string>());
-  const [login$] = useState(() => new Subject<void>());
+  const email$ = useRef(new Subject<string>()).current;
+  const password$ = useRef(new Subject<string>()).current;
+  const login$ = useRef(new Subject<void>()).current;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const isLoading = useSelector((state) => state.userManagement.openRequests.length > 0)
 
   useEffect(() => {
     const email$$ = email$.subscribe(setEmail);
@@ -30,6 +32,8 @@ function LoginPage() {
       login$$.unsubscribe();
     };
   }, []);
+
+  console.log("i render")
 
   return (
     <Theme dataTheme={"spcfy"}>
@@ -48,13 +52,13 @@ function LoginPage() {
                     <label className="label">
                       <span className="label-text">Email</span>
                     </label>
-                    <Input subject={email$} placeholder="email" value={email} />
+                    <Input subject={email$} placeholder="email" value={email} isValid={validateEmail(email)} />
                   </div>
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Password</span>
                     </label>
-                    <Password subject={password$} placeholder="password" value={password} />
+                    <Password subject={password$} placeholder="password" value={password} isValid={password.length > 5} />
                     <label className="label">
                       <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                     </label>
@@ -99,6 +103,7 @@ function LoginPage() {
         </div>
       </div>
       <Footer />
+      {isLoading ? <LoadingIndicator /> : null}
     </Theme>
   )
 }
