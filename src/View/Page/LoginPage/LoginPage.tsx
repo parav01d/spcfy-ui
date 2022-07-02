@@ -1,18 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Theme } from 'react-daisyui';
+import { useNavigate } from "react-router-dom";
 import { Footer, Navigation } from 'View/Component';
 import { Button, Input, Password, validateEmail } from "View/Common";
 import { Subject } from 'rxjs';
 import Actions, { useDispatch, useSelector } from 'Flux';
 import { LoadingIndicator } from 'View/Common/DataDisplay/LoadingIndicator/LoadingIndicator';
 
-function LoginPage() {
+export const LoginPage = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const email$ = useRef(new Subject<string>()).current;
   const password$ = useRef(new Subject<string>()).current;
   const login$ = useRef(new Subject<void>()).current;
+  const register$ = useRef(new Subject<void>()).current;
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,20 +29,24 @@ function LoginPage() {
     const login$$ = login$.subscribe(() => {
       dispatch(Actions.authenticateRequest({ email, password }));
     })
+    const register$$ = register$.subscribe(() => {
+      navigate("/register");
+    })
 
     return () => {
       email$$.unsubscribe();
       password$$.unsubscribe();
       login$$.unsubscribe();
+      register$$.unsubscribe();
     };
   }, []);
-
-  console.log("i render")
 
   return (
     <Theme dataTheme={"spcfy"}>
       <div className="flex flex-col h-screen justify-between bg-[url('/public/login.jpg')] bg-cover bg-center">
-        <Navigation />
+        <Navigation>
+          <Button type='primary' subject={register$} value={undefined}>Register</Button>
+        </Navigation>
         <div className='flex flex-1 flex-col justify-center items-center'>
           <div className="hero max-w-4xl bg-base-200 rounded">
             <div className="hero-content flex-col lg:flex-row-reverse p-6">
@@ -107,5 +115,3 @@ function LoginPage() {
     </Theme>
   )
 }
-
-export default LoginPage;

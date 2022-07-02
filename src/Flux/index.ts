@@ -37,3 +37,10 @@ export const useDispatch: () => AppDispatch = useRRDispatch
 export const useSelector: TypedUseSelectorHook<typeof State> = useRRSelector
 
 epicMiddleware.run(Epics);
+
+
+// Utilities 
+interface ILoadingIdentication {
+    openRequests: string[]
+}
+export const removeRequest = (state: ILoadingIdentication, action: AnyAction): string[] => state.openRequests.filter((type: string) => type === action.type.replace("Failure", "Request").replace("Success", "Request"));

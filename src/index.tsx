@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from "react-router-dom";
-import 'View/index.css';
-import LoginPage from 'View/Page/LoginPage/LoginPage';
-import { Routes, Route } from "react-router-dom";
-import reportWebVitals from './reportWebVitals';
+import { LoginPage, RegisterPage } from 'View/Page';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
-import { Store }      from './Flux';
+import reportWebVitals from './reportWebVitals';
+import { Store } from './Flux';
+import 'View/index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +17,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </Provider>

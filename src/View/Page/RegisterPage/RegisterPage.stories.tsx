@@ -1,17 +1,16 @@
-import { Store } from 'Flux';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { Store } from 'Flux';
+import { RegisterPage } from './RegisterPage';
 import "View/index.css"
-import { LoginPage } from './LoginPage';
 
 export default {
-    title: 'Page/LoginPage',
-    component: LoginPage,
+    title: 'Page/RegisterPage',
+    component: RegisterPage,
 };
-
 
 export const Standard = () => (
     <Provider store={Store}>
-        <LoginPage />
+        <RegisterPage />
     </Provider>
 )

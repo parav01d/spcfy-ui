@@ -1,16 +1,16 @@
 import React from 'react';
 import { Theme } from 'react-daisyui';
 import "View/index.css"
-import { LoadingIndicator } from './LoadingIndicator';
+import { Footer } from 'View/Component/Footer/Footer';
 
 export default {
-    title: 'Common/DataDisplay/LoadingIndicator',
-    component: LoadingIndicator,
+    title: 'Component/Footer',
+    component: Footer,
 };
 
 
 export const Standard = () => (
     <Theme className={"h-full flex flex-1 justify-center items-center"} dataTheme={"spcfy"}>
-        <LoadingIndicator />
+        <Footer />
     </Theme>
 )
